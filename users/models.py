@@ -11,3 +11,16 @@ class User(AbstractUser):
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
+
+
+class Payment(models.Model):
+    METHOD = (
+        ('cash', 'наличные'),
+        ('non-cash', 'перевод на счет'),
+    )
+
+    user = models.ForeignKey('User', on_delete=models.CASCADE, verbose_name='пользователь', related_name='payment')
+    date_of_payment = models.DateField(verbose_name='дата оплаты')
+    paid_course = models.ForeignKey('materials.Course', on_delete=models.CASCADE, verbose_name='оплаченный курс')
+    payment_amount = models.FloatField(verbose_name='сумма оплаты')
+    payment_method = models.CharField(max_length=30, choices=METHOD, verbose_name='способ оплаты')

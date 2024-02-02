@@ -20,7 +20,8 @@ class Lesson(models.Model):
     description = models.TextField(verbose_name='описание')
     preview = models.ImageField(upload_to='course/', null=True, blank=True, verbose_name='превью')
     link = models.CharField(max_length=150, null=True, blank=True, verbose_name='ссылка')
-    course = models.ForeignKey('Course', on_delete=models.SET_NULL, null=True, blank=True, verbose_name='курс')
+    course = models.ForeignKey('Course', on_delete=models.SET_NULL, null=True, blank=True,
+                               verbose_name='курс', related_name='lesson')
 
     def __str__(self):
         return f'{self.title} ({self.course})'
