@@ -4,3 +4,4 @@ pillow
 djangorestframework
 ipython
 django-filter
+djangorestframework-simplejwt

@@ -22,6 +22,14 @@ class Command(BaseCommand):
         user.set_password('Test4321')
         user.save()
 
+        user = User.objects.create(
+            email='moderator@mail.ru',
+            first_name='Moderator',
+            last_name='Moderatorov',
+        )
+        user.set_password('Mod4321')
+        user.save()
+
         payment = Payment.objects.create(
             user_id=3,
             date_of_payment='2023-10-05',

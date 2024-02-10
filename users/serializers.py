@@ -10,9 +10,16 @@ class PaymentSerializers(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class UserSerializers(serializers.ModelSerializer):
+class UserFullSerializers(serializers.ModelSerializer):
     payment = PaymentSerializers(many=True)
 
     class Meta:
         model = User
         fields = '__all__'
+
+
+class UserGeneralSerializers(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'email', 'avatar')
