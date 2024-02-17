@@ -4,7 +4,7 @@ from materials.apps import MaterialsConfig
 
 from materials.views import LessonCreateAPIView, LessonListAPIView, LessonRetrieveAPIView, \
     LessonUpdateAPIView, LessonDestroyAPIView, CourseCreateAPIView, CourseListAPIView, CourseRetrieveAPIView, \
-    CourseUpdateAPIView, CourseDestroyAPIView
+    CourseUpdateAPIView, CourseDestroyAPIView, SubscriptionAPIView
 
 app_name = MaterialsConfig.name
 
@@ -20,4 +20,5 @@ urlpatterns = [
     path('course/<int:pk>/', CourseRetrieveAPIView.as_view(), name='course-get'),
     path('course/update/<int:pk>/', CourseUpdateAPIView.as_view(), name='course-update'),
     path('course/delete/<int:pk>/', CourseDestroyAPIView.as_view(), name='course-delete'),
+    path('course/sub/', SubscriptionAPIView.as_view(), name='course-sub'),
 ]
