@@ -6,3 +6,5 @@ ipython
 django-filter
 djangorestframework-simplejwt
 coverage
+drf-yasg
+requests

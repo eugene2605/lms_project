@@ -5,7 +5,7 @@ from rest_framework.permissions import AllowAny
 
 from users.models import User, Payment
 from users.permissions import IsSuperUser, IsOwner
-from users.serializers import PaymentSerializers, UserFullSerializers, UserGeneralSerializers
+from users.serializers import PaymentSerializers, UserFullSerializers, UserGeneralSerializers, PaymentCreateSerializers
 
 
 class UserCreateAPIView(generics.CreateAPIView):
@@ -43,7 +43,11 @@ class UserDestroyAPIView(generics.DestroyAPIView):
 
 
 class PaymentCreateAPIView(generics.CreateAPIView):
-    serializer_class = PaymentSerializers
+    serializer_class = PaymentCreateSerializers
+
+    def perform_create(self, serializer):
+        new_pay = serializer.save(user=self.request.user)
+        new_pay.save()
 
 
 class PaymentListAPIView(generics.ListAPIView):

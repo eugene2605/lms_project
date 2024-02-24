@@ -19,8 +19,8 @@ class Payment(models.Model):
         ('non-cash', 'перевод на счет'),
     )
 
-    user = models.ForeignKey('User', on_delete=models.CASCADE, verbose_name='пользователь', related_name='payment')
-    date_of_payment = models.DateField(verbose_name='дата оплаты')
+    user = models.ForeignKey('User', on_delete=models.CASCADE, blank=True, verbose_name='пользователь', related_name='payment')
+    date_of_payment = models.DateField(auto_now_add=True, blank=True, verbose_name='дата оплаты')
     paid_course = models.ForeignKey('materials.Course', on_delete=models.CASCADE, verbose_name='оплаченный курс')
     payment_amount = models.FloatField(verbose_name='сумма оплаты')
     payment_method = models.CharField(max_length=30, choices=METHOD, verbose_name='способ оплаты')
