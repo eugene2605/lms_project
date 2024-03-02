@@ -26,4 +26,4 @@ class CourseSerializer(serializers.ModelSerializer):
         return 0
 
     def get_subscription(self, instance):
-        return instance.subscription.exists()
+        return [sub.users.email for sub in Subscription.objects.filter(course=instance)]

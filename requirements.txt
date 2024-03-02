@@ -8,3 +8,8 @@ djangorestframework-simplejwt
 coverage
 drf-yasg
 requests
+celery
+redis
+eventlet
+django-celery-beat
+python-dotenv

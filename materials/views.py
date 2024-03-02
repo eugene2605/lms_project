@@ -7,6 +7,7 @@ from materials.models import Course, Lesson, Subscription
 from materials.paginators import CoursePaginator, LessonPaginator
 from materials.permissions import IsSuperUser, IsModeratorOrOwner
 from materials.serializers import CourseSerializer, LessonSerializer
+from materials.tasks import send_mail_to_subscribers
 
 
 class CourseCreateAPIView(generics.CreateAPIView):
@@ -30,6 +31,10 @@ class CourseUpdateAPIView(generics.UpdateAPIView):
     serializer_class = CourseSerializer
     queryset = Course.objects.all()
     permission_classes = [IsModeratorOrOwner | IsSuperUser]
+
+    def perform_update(self, serializer):
+        course = serializer.save()
+        send_mail_to_subscribers.delay(course.title, course.id)
 
 
 class CourseDestroyAPIView(generics.DestroyAPIView):
